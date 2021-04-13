@@ -3,7 +3,7 @@
 Relative put/get data into/from byte array
 Data types: byte[], byte, short, int, long, float, double
 
-Owerview:
+Overview:
   Constructors:
     ByteArray();
     ByteArray(byte[] bytes); // resizing disabled
