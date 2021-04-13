@@ -4,7 +4,7 @@
  * Relative put/get data into/from byte array
  * Data types: byte[], byte, short, int, long, float, double
  *
- * Usage: see main method at the end of code
+ * Usage: see ./ByteArrayTest.java
  *
  * Created: 2018-12-15
  */
@@ -57,7 +57,7 @@ public class ByteArray {
     return newPointer;
   }
    
-  public void resizable(boolean onoff) {
+  public void enableResizing(boolean onoff) {
     dataResizable = onoff;
   }
   

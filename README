@@ -1,1 +1,39 @@
 # ByteArray, MIT (c) 2018-2021 miktim@mail.ru
+
+Relative put/get data into/from byte array
+Data types: byte[], byte, short, int, long, float, double
+
+Owerview:
+  Constructors:
+    ByteArray();
+    ByteArray(byte[] bytes); // resizing disabled
+    
+  Constants:
+    static final int AUTOEXPAND_INCREMENT = 64;
+
+  Methods:
+    byte[] array(); // returns filled part of internal byte array
+    int truncate() throws IllegalStateException; // truncate internal byte array to filled size
+    void enableResizing(boolean yesNo); // enable/disable autoexpand/truncate
+    boolean isResizable();
+    int length();
+    int getPointer();
+    void setPointer(int pointer)
+// PUT data methods. All methods returns а new pointer (offset).
+// Can throw an ArrayIndexOutOfBoundsException
+    int put(byte b);
+    int put(byte[] bytes);
+    int putShort(short s);
+    int putInt(int i);
+    int putFloat(float f);
+    int putLong(long i);
+    int putDouble(double d);
+// GET data methods
+// Can throw an ArrayIndexOutOfBoundsException
+    byte get();
+    byte[] get(int len);
+    short getShort();
+    int getInt();
+    float getFloat();
+    long getLong();
+    double getDouble();

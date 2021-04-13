@@ -50,7 +50,7 @@ public class ByteArrayTest {
         }
         ba.setPointer(p);
         ba.truncate();
-        ba.resizable(false);
+        ba.enableResizing(false);
         try {
             ba.put(b);
             System.out.println("  Resizable disabled FAIL!");
