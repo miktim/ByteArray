@@ -1,14 +1,18 @@
+package bytearray;
+
 /**
  * ByteArrayTest, MIT (c) 2018 miktim@mail.ru
  *
  * Created: 2018-12-15
  */
-
-
 import java.util.Arrays;
 import org.miktim.ByteArray;
 
 public class ByteArrayTest {
+
+    public static void log(String s) {
+        System.out.println(s);
+    }
 
     public static void main(String[] args) throws Exception {
         String title = "ByteArray test";
@@ -20,7 +24,7 @@ public class ByteArrayTest {
         float f = 3.1416f;
         double d = (double) f;
 
-        System.out.println(title + "\r\nPut data...");
+        log(title + "\r\nPut data...");
         ByteArray ba = new ByteArray();
 
         ba.put(b);
@@ -38,7 +42,7 @@ public class ByteArrayTest {
 
         int expectedLength = 1 + 2 + 2 + 4 + 4 + t.length + 8 + 8 + 4 + 4 + 8 + 8;
         if (ba.length() != expectedLength) {
-            System.out.println("  Expected length FAIL!");
+            log("  Expected length FAIL!");
         }
 
         while (ba.length() < ByteArray.AUTOEXPAND_INCREMENT) {
@@ -46,64 +50,76 @@ public class ByteArrayTest {
         }
 
         if (ba.getPointer() != ba.length()) {
-            System.out.println("  Resizable enabled FAIL!");
+            log("  Resizable enabled FAIL!");
         }
         ba.setPointer(p);
         ba.truncate();
         ba.enableResizing(false);
         try {
             ba.put(b);
-            System.out.println("  Resizable disabled FAIL!");
+            log("  Resizable disabled FAIL!");
         } catch (Exception e) {
         }
 
-        System.out.println("Get data...");
+        log("Get data...");
         ba = new ByteArray(ba.array());
 
         ba.get(0);
         ba.put(new byte[0]);
         if (ba.get() != b) {
-            System.out.println("  Byte put/get FAIL!");
+            log("  Byte put/get FAIL!");
         }
         if (ba.getShort() != s) {
-            System.out.println("  Short1 put/get FAIL!");
+            log("  Short1 put/get FAIL!");
         }
         if (ba.getShort() != ~s) {
-            System.out.println("  Short2 put/get FAIL!");
+            log("  Short2 put/get FAIL!");
         }
         if (ba.getInt() != i) {
-            System.out.println("  Int1 put/get FAIL!");
+            log("  Int1 put/get FAIL!");
         }
         if (ba.getInt() != ~i) {
-            System.out.println("  Int2 put/get FAIL!");
+            log("  Int2 put/get FAIL!");
         }
         if (!Arrays.equals(ba.get(t.length), t)) {
-            System.out.println("  Byte[] put/get FAIL!");
+            log("  Byte[] put/get FAIL!");
         }
         if (ba.getLong() != l) {
-            System.out.println("  Long1 put/get FAIL!");
+            log("  Long1 put/get FAIL!");
         }
         if (ba.getLong() != ~l) {
-            System.out.println("  Long2 put/get FAIL!");
+            log("  Long2 put/get FAIL!");
         }
         if (ba.getFloat() != f) {
-            System.out.println("  Float1 put/get FAIL!");
+            log("  Float1 put/get FAIL!");
         }
         if (ba.getFloat() != -f) {
-            System.out.println("  Float2 put/get FAIL!");
+            log("  Float2 put/get FAIL!");
         }
         if (ba.getDouble() != d) {
-            System.out.println("  Double1 put/get FAIL!");
+            log("  Double1 put/get FAIL!");
         }
         if (ba.getDouble() != -d) {
-            System.out.println("  Double2 put/get FAIL!");
+            log("  Double2 put/get FAIL!");
         }
         try {
             ba.get(1);
-            System.out.println("  Get after data end FAIL!");
+            log("  Get after data end FAIL!");
         } catch (Exception e) {
         }
-        System.out.println("Test completed");
+
+        i = ByteArray.AUTOEXPAND_INCREMENT * 4 + 3;
+        byte[] bytes = new byte[i];
+        ba = new ByteArray();
+        ba.put(new byte[3]);
+        p = ba.put(bytes);
+        ba.setPointer(3);
+        bytes = ba.get(i);
+        if (p != (i + 3) || bytes.length != i) {
+            log(" byte[AUTOEXPAND_INCREMENT*4+3] put/get FAIL!");
+        }
+
+        log("Test completed");
     }
 
 }
