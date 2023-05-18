@@ -1,30 +1,36 @@
 # ByteArray class, MIT (c) 2018-2021 miktim@mail.ru
 
-Relative put/get data into/from byte array (big-endian order)
-Data types: short, int, long, float, double, byte, byte[]
-Float and double values are converted to/from IEEE 754 
+Relative put/get data into/from byte array (big-endian order).
+Data types: byte, byte[], short, int, long, float, double. 
+Float and double values are converted to/from IEEE 754. 
 
 package org.miktim
 
 Overview:
 
   Class ByteArray
+  
     Constructors:
-      ByteArray();
-      ByteArray(int bytes);    // resizing disabled
-      ByteArray(byte[] bytes); // resizing disabled
+      ByteArray(); 
+      // buffer length = AUTOEXPAND_INCREMENT, data length = 0, pointer = 0, resizeable 
+      ByteArray(int bytes);    
+      // buffer length = bytes, data length = 0, pointer = 0, not resizeable 
+      ByteArray(byte[] bytes); 
+      // buffer = bytes, data length = bytes.length, pointer = 0, not resizeable 
     
     Constants:
       static final int AUTOEXPAND_INCREMENT = 64;
 
     Methods:
-      byte[] array(); // returns internal byte array
-      int truncate() throws IllegalStateException; // truncate to current pointer
+      int length(); // returns data length
+      int getPointer(); // returns current pointer (offset)
+      void setPointer(int pointer) throws ArrayIndexOutOfBoundsException;
+      // pointer between 0 and data length
+      byte[] array(); // returns data array
+      int truncate() throws IllegalStateException; // truncate data to the current pointer
       void enableResizing(boolean yesNo); // enable/disable autoexpand/truncate
       boolean isResizable();
-      int length();
-      int getPointer();
-      void setPointer(int pointer)
+      
 // PUT data methods. All methods returns а new pointer (offset).
 // Can throw an ArrayIndexOutOfBoundsException (resizing disabled)
       int put(byte b);
@@ -34,6 +40,7 @@ Overview:
       int putFloat(float f);
       int putLong(long i);
       int putDouble(double d);
+      
 // GET data methods
 // Can throw an ArrayIndexOutOfBoundsException
       byte get();
