@@ -2,7 +2,7 @@
 
 Relative put/get data into/from byte array (big-endian order).
 Data types: byte, byte[], short, int, long, float, double. 
-Float and double values are converted to/from IEEE 754. 
+Float and double values are converted to/from IEEE 754 int/long. 
 
 package org.miktim
 
@@ -16,7 +16,7 @@ Overview:
       ByteArray(int bytes);    
       // buffer length = bytes, data length = 0, pointer = 0, not resizeable 
       ByteArray(byte[] bytes); 
-      // buffer = bytes, data length = bytes.length, pointer = 0, not resizeable 
+      // buffer = bytes[], data length = bytes.length, pointer = 0, not resizeable 
     
     Constants:
       static final int AUTOEXPAND_INCREMENT = 64;
