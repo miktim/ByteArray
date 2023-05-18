@@ -1,7 +1,8 @@
 # ByteArray class, MIT (c) 2018-2021 miktim@mail.ru
 
-Relative put/get data into/from byte array
-Data types: byte[], byte, short, int, long, float, double
+Relative put/get data into/from byte array (big-endian order)
+Data types: short, int, long, float, double, byte, byte[]
+Float and double values are converted to/from IEEE 754 
 
 package org.miktim
 
