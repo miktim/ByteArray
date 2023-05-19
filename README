@@ -1,8 +1,8 @@
 # ByteArray class, MIT (c) 2018-2021 miktim@mail.ru
 
-Relative put/get data into/from byte array (big-endian order).
+Relative put/get data into/from auto expandable byte array (big-endian order).
 Data types: byte, byte[], short, int, long, float, double. 
-Float and double values are converted to/from IEEE 754 int/long. 
+Float and double values are converted to IEEE 754 int/long. 
 
 package org.miktim
 
@@ -27,6 +27,7 @@ Overview:
       void setPointer(int pointer) throws ArrayIndexOutOfBoundsException;
       // pointer between 0 and data length
       byte[] array(); // returns data array
+      //! if data length = buffer length, buffer returned
       int truncate() throws IllegalStateException; // truncate data to the current pointer
       void enableResizing(boolean yesNo); // enable/disable autoexpand/truncate
       boolean isResizable();
